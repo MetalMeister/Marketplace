@@ -16,5 +16,7 @@ import javax.ejb.Local;
 public interface ShoppingCartBeanLocal {
 
     void addItem(Item item);
+
+    double getTotalPrice();
     
 }

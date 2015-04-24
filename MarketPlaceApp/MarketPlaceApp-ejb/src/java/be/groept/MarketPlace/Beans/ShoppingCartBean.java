@@ -6,6 +6,8 @@
 package be.groept.MarketPlace.Beans;
 
 import be.groept.MarketPlace.Entities.Item;
+import java.util.LinkedList;
+import java.util.List;
 import javax.ejb.Stateful;
 
 /**
@@ -14,13 +16,18 @@ import javax.ejb.Stateful;
  */
 @Stateful
 public class ShoppingCartBean implements ShoppingCartBeanLocal {
+    
+    private List<Item> itemList = new LinkedList<>();;
 
     @Override
     public void addItem(Item item) {
+        itemList.add(item);
         System.out.println("Item: " + item.getName() + "added.");
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @Override
+    public double getTotalPrice() {
+        return itemList.stream().mapToDouble(i -> i.getPrice()).sum();
+    }
     
 }
